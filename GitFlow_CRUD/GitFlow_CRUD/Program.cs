@@ -4,8 +4,10 @@ namespace GitFlow_CRUD
 {
     class Program
     {
+        static List<string> games = new List<string>();
         private static void Menu()
         {
+
             bool exit = false;
             while (exit == false)
             {
@@ -27,10 +29,10 @@ namespace GitFlow_CRUD
                             AddGame();
                             break;
                         case 2:
-
+                            SeeGame();
                             break;
                         case 3:
-
+                            EditGame();
                             break;
                         case 4:
 
@@ -54,22 +56,73 @@ namespace GitFlow_CRUD
         }
         private static void AddGame()
         {
-            List<string> games = new List<string>();
             Console.WriteLine("Enter the name of the game. When you want to finish, type 'done': ");
-            while (true) { 
+            while (true)
+            {
                 Console.WriteLine("Add game: ");
                 string gameName = Console.ReadLine();
-                if (gameName == "done")
+                if (gameName.ToLower() == "done")
                 {
                     break;
                 }
                 games.Add(new string(gameName));
-                Console.WriteLine($"\nSaved {games.Count} games. this are:");
-                foreach (string game in games)
+                Console.WriteLine($"\nSaved {games.Count} games.");
+
+            }
+        }
+        private static void SeeGame()
+        {
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("----------- List of games -----------");
+            if (games.Count == 0)
+            {
+                Console.WriteLine("No games found.");
+            }
+            else
+            {
+                for (int i = 0; i < games.Count; i++)
                 {
-                    Console.WriteLine($"- {game}");
+                    Console.WriteLine($"{i + 1}. {games[i]}");
                 }
             }
+            Console.WriteLine("-------------------------------------");
+        }
+
+        private static void EditGame()
+        {
+            if (games.Count == 0)
+            {
+                Console.WriteLine("There are no games to edit.");
+                return;
+            }
+
+            Console.WriteLine("\n=== GAME LIST ===");
+
+            for (int i = 0; i < games.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {games[i]}");
+            }
+
+            Console.Write("\nSelect the number of the game to edit: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int option))
+            {
+                Console.WriteLine("Invalid option.");
+                return;
+            }
+
+            if (option < 1 || option > games.Count)
+            {
+                Console.WriteLine("Game not found.");
+                return;
+            }
+
+            Console.Write("Enter the new game name: ");
+            string newName = Console.ReadLine();
+
+            games[option - 1] = newName;
+
+            Console.WriteLine("Game updated successfully.");
         }
 
         static void Main(string[] args)

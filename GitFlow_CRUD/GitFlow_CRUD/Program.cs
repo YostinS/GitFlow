@@ -7,7 +7,7 @@ namespace GitFlow_CRUD
         static List<string> games = new List<string>();
         private static void Menu()
         {
-            
+
             bool exit = false;
             while (exit == false)
             {
@@ -32,7 +32,7 @@ namespace GitFlow_CRUD
                             SeeGame();
                             break;
                         case 3:
-
+                            EditGame();
                             break;
                         case 4:
 
@@ -86,6 +86,43 @@ namespace GitFlow_CRUD
                 }
             }
             Console.WriteLine("-------------------------------------");
+        }
+
+        private static void EditGame()
+        {
+            if (games.Count == 0)
+            {
+                Console.WriteLine("There are no games to edit.");
+                return;
+            }
+
+            Console.WriteLine("\n=== GAME LIST ===");
+
+            for (int i = 0; i < games.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {games[i]}");
+            }
+
+            Console.Write("\nSelect the number of the game to edit: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int option))
+            {
+                Console.WriteLine("Invalid option.");
+                return;
+            }
+
+            if (option < 1 || option > games.Count)
+            {
+                Console.WriteLine("Game not found.");
+                return;
+            }
+
+            Console.Write("Enter the new game name: ");
+            string newName = Console.ReadLine();
+
+            games[option - 1] = newName;
+
+            Console.WriteLine("Game updated successfully.");
         }
 
         static void Main(string[] args)

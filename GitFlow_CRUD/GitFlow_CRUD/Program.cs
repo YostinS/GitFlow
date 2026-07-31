@@ -4,8 +4,10 @@ namespace GitFlow_CRUD
 {
     class Program
     {
+        static List<string> games = new List<string>();
         private static void Menu()
         {
+            
             bool exit = false;
             while (exit == false)
             {
@@ -27,7 +29,7 @@ namespace GitFlow_CRUD
                             AddGame();
                             break;
                         case 2:
-
+                            SeeGame();
                             break;
                         case 3:
 
@@ -54,22 +56,36 @@ namespace GitFlow_CRUD
         }
         private static void AddGame()
         {
-            List<string> games = new List<string>();
             Console.WriteLine("Enter the name of the game. When you want to finish, type 'done': ");
-            while (true) { 
+            while (true)
+            {
                 Console.WriteLine("Add game: ");
                 string gameName = Console.ReadLine();
-                if (gameName == "done")
+                if (gameName.ToLower() == "done")
                 {
                     break;
                 }
                 games.Add(new string(gameName));
-                Console.WriteLine($"\nSaved {games.Count} games. this are:");
-                foreach (string game in games)
+                Console.WriteLine($"\nSaved {games.Count} games.");
+
+            }
+        }
+        private static void SeeGame()
+        {
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("----------- List of games -----------");
+            if (games.Count == 0)
+            {
+                Console.WriteLine("No games found.");
+            }
+            else
+            {
+                for (int i = 0; i < games.Count; i++)
                 {
-                    Console.WriteLine($"- {game}");
+                    Console.WriteLine($"{i + 1}. {games[i]}");
                 }
             }
+            Console.WriteLine("-------------------------------------");
         }
 
         static void Main(string[] args)

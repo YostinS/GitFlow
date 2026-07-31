@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
 namespace GitFlow_CRUD
 {
     class Program
@@ -23,7 +24,7 @@ namespace GitFlow_CRUD
                     switch (answer)
                     {
                         case 1:
-
+                            AddGame();
                             break;
                         case 2:
 
@@ -46,9 +47,28 @@ namespace GitFlow_CRUD
                 }
                 else
                 {
-                    Console.WriteLine("Entrada invalida. Por favor ingresa un numero.");
+                    Console.WriteLine("Invalid Number");
                 }
 
+            }
+        }
+        private static void AddGame()
+        {
+            List<string> games = new List<string>();
+            Console.WriteLine("Enter the name of the game. When you want to finish, type 'done': ");
+            while (true) { 
+                Console.WriteLine("Add game: ");
+                string gameName = Console.ReadLine();
+                if (gameName == "done")
+                {
+                    break;
+                }
+                games.Add(new string(gameName));
+                Console.WriteLine($"\nSaved {games.Count} games. this are:");
+                foreach (string game in games)
+                {
+                    Console.WriteLine($"- {game}");
+                }
             }
         }
 

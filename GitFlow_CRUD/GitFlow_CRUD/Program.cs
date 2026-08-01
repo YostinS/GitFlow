@@ -38,8 +38,7 @@ namespace GitFlow_CRUD
                             DeleteGame();
                             break;
                         case 5:
-
-
+                            Manual();
                             break;
                         case 6:
 
@@ -159,6 +158,19 @@ namespace GitFlow_CRUD
 
             Console.WriteLine($"'{deletedGame}' was deleted successfully.");
         }
+              static void Manual()
+        {
+            Console.WriteLine("--------------------------------------------------------------------------");
+            Console.WriteLine("                             Game Center Manual  ");
+            Console.WriteLine("--------------------------------------------------------------------------");
+            Console.WriteLine("1. Add game: Allows you to add a new game to the list.");
+            Console.WriteLine("2. See games: Displays the list of games you have added.");
+            Console.WriteLine("3. Update game: Allows you to edit the name of an existing game.");
+            Console.WriteLine("4. Delete game: Allows you to remove a game from the list.");
+            Console.WriteLine("5. Read manual: Displays this manual with instructions for using the application.");
+            Console.WriteLine("6. Exit: Closes the application.");
+            Console.WriteLine("--------------------------------------------------------------------------");
+              }
         static void Main(string[] args)
         {
             Menu();

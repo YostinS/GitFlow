@@ -35,7 +35,7 @@ namespace GitFlow_CRUD
                             EditGame();
                             break;
                         case 4:
-
+                            DeleteGame();
                             break;
                         case 5:
 
@@ -124,7 +124,41 @@ namespace GitFlow_CRUD
 
             Console.WriteLine("Game updated successfully.");
         }
+        private static void DeleteGame()
+        {
+            if (games.Count == 0)
+            {
+                Console.WriteLine("There are no games to delete.");
+                return;
+            }
 
+            Console.WriteLine("\n=== GAME LIST ===");
+
+            for (int i = 0; i < games.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {games[i]}");
+            }
+
+            Console.Write("Select the number of the game to delete: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int option))
+            {
+                Console.WriteLine("Invalid option.");
+                return;
+            }
+
+            if (option < 1 || option > games.Count)
+            {
+                Console.WriteLine("Game not found.");
+                return;
+            }
+
+            string deletedGame = games[option - 1];
+
+            games.RemoveAt(option - 1);
+
+            Console.WriteLine($"'{deletedGame}' was deleted successfully.");
+        }
         static void Main(string[] args)
         {
             Menu();
